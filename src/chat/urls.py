@@ -4,6 +4,9 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("<str:room_name>/", views.room, name="room"),
+    path('', views.login_view, name="login"),
+    path("register/", views.register_view, name="index"),
+    path("index/", views.room_list, name="index"),
+    path("chat/<str:room_name>/", views.chatroom, name="room"),
+    path('logout/', views.logout_view, name = "logout" )
 ]

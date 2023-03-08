@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        body{
+            font-family: 'Open Sans', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+    
+        <div class="p-4 m-4">
+    
+            
+            <div class="col-lg-5 rounded mx-auto border pt-4">
+                <div class="text-center col">
+                
+                    <img src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677856451/live-chat_icon-icons.com_52831_elkqw9.png" alt=""
+                    class="" style="height: 150px;">
+                <!-- <hr> -->
+                <h2 class="fw-bolder">Create an account</h2>
+                <hr>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    {% if error%}
+                    <div class="alert alert-danger" role="alert">
+                        {{error}}
+                    </div>
+                    {% endif %}
+                    <!-- username -->
+                    <div class="form-group">
+                        <label for="">Username</label>
+                        <input type="text" name="username" value="" class="form-control form-control-sm"
+                         placeholder="">
+                    </div>
+   
+                    <!-- email -->
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input required type="email" name="email" value="" class=" form-control-sm form-control" placeholder="example@gmail.com">
+                    </div>
+    
+    
+                    <!-- password -->
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" 
+                        name="password" class="form-control form-control-sm" placeholder="********">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Confirm Password</label>
+                        <input type="password" 
+                        name="password_confirm" 
+                        id="" class="form-control form-control-sm" placeholder="********">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+
+                        <input class="btn btn-sm btn-info w-100 p-2" type="submit" value="Create An Account ">
+                    </div>
+                    <a href="{% url 'login' %}" >I have already account</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

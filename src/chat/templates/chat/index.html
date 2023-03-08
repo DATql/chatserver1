@@ -1,27 +1,305 @@
-<!-- chat/templates/chat/index.html -->
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8"/>
-    <title>Chat Rooms</title>
-</head>
-<body>
-    What chat room would you like to enter?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+    />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      body {
+        font-family: "Open Sans", sans-serif;
+      }
+      .room-selection {
+        max-width: 80%;
+        margin: 0 auto;
+        padding: 50px;
+        text-align: center;
+      }
+
+      .room-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 30px;
+      }
+
+      .room-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f9f9f9;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+        max-width: 250px;
+      }
+
+      .room-item:hover {
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-5px);
+      }
+
+      .room-item img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 20px;
+      }
+
+      .room-item h2 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .room-item p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 20px;
+      }
+
+      .room-item a {
+        background-color: #17a2b8;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+
+      .room-item a:hover {
+        background-color: #dc3545;
+        text-decoration: none;
+        color: white;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 30px;
+        font-weight: bold;
+      }
+
+    .service{
+        position: fixed;
+        right:40px; 
+        bottom:100px;
+        z-index: 999;
+    }
+    .service a img{
+        padding:15px;
+        background-color: #f9f9f9;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 30%;
+        width: 60px;
+        margin-top: 20px;
+
+        opacity: 0.9;
+        animation: shake 0.5s;
+        animation-iteration-count: infinite;
+    }
+    .service a img:hover{        
+        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
+    }
+    @keyframes shake {
+        0% { transform:  rotate(10deg); }
+        20% { transform:  rotate(-5deg); }
+        40% { transform:  rotate(10deg); }
+        60% { transform:  rotate(-5deg); }
+        80% { transform:  rotate(10deg); }
+        100% { transform:  rotate(-5deg); }
+    }
+    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  </head>
+  <body style="background-color: #f5f5f5;"">
+    <!--navbar-->
+    <nav style="background-color: white">
+      <div class="container">
+        <nav class="navbar navbar-expand-sm">
+          <div class="container-fluid">
+            <a class="navbar-brand fw-bolder" href="#" style="font-size: 25px">
+              <img
+                src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677856451/live-chat_icon-icons.com_52831_elkqw9.png"
+                alt="Avatar Logo"
+                style="width: 40px; margin-right: 10px"
+                class="rounded-pill d-inline-block align-text-top"
+              />
+              CHAT ROOM
+            </a>
+            <div>
+              {% if request.user.is_authenticated %}
+                <span
+                  class="text-danger fst-italic fw-bolder"
+                  style="margin-right: 20px"
+                  >Welcome, {{ request.user.username }}!</span>
+                  <a class="btn btn-outline-primary me-2" href="{% url 'logout' %}">Logout</a>
+              {%else%}
+                  <span
+                  class="text-danger fst-italic fw-bolder"
+                  style="margin-right: 20px"
+                  >Please log in to continue.</span>
+                  <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a>
+              {%endif%}
+             
+            </div>
+          </div>
+        </nav>
+      </div>
+    </nav>
+    <!--navbar-->
+
+    <!-- rooms -->
+    <section class="message-area" style="padding: 10px 0 0 0">
+      <div class="room-selection container">
+        
+        <div class="container">
+            <h1>Room List</h1>
+        </div>
+        <div class="room-list">
+            <div class="room-item " id="search-room">
+                
+                <form action="/search-room" method="POST" style="padding-top:30px">
+                    <!-- username -->
+                    <div class="form-group">
+                        <label for="">Roomname</label>
+                        <input type="text" name="Roomname"
+                         id="" value="" class="form-control form-control-sm" 
+                         placeholder="">
+                    </div>
+                    <!-- password -->
+                    <div class="form-group">
+                        <label for="">Password</label>
+                        <input type="password" 
+                        name="password" 
+                        id=""
+                         class="form-control form-control-sm" placeholder="********">
+                    </div>
+                    <div class="form-group">
+                        
+                        <input class="btn btn-sm btn-info" type="submit" value="Join Room">
+                    </div> 
+                </form>
+            </div>
+            <div class="room-item " id ="create-room"> 
+                <form action="/create-room" method="POST">
+                    <!-- roomname -->
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="">Roomname</label>
+                        <input type="text" name="Roomname"
+                         id="" value="" class="form-control form-control-sm" 
+                         placeholder="">
+                    </div>
+                    <!-- password -->
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="">Password</label>
+                        <input type="password" 
+                        name="password" 
+                        id=""
+                         class="form-control form-control-sm" placeholder="********">
+                    </div>
+                    <!-- confirmpassword -->
+                    <div class="form-group" style="margin-bottom: 12px;">
+                        <label for="">Confirm Password</label>
+                        <input type="password" 
+                        name="password" 
+                        id=""
+                         class="form-control form-control-sm" placeholder="********">   
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-sm btn-info" type="submit" value="Create Room">
+                    </div> 
+                </form>
+            </div>
+            <!-- room -->
+            {% for room in rooms %}
+            <div class="room-item">
+                <img
+                 src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677994637/room_l6bep9.jpg"
+                alt=""
+                />
+                <h2>{{room}}</h2>
+                <a href="#" onclick="joinRoom('{{room}}')">Join now</a>
+            </div>
+          {% endfor %}
+            
+            <!-- room -->       
+        </div>
+      </div>
+    </section>
+    <!-- rooms -->
+    <div class="service">
+        
+        <a href="#" id="search-room2"><img src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677999164/searchmagnifierinterfacesymbol1_79893_zbo0g1.png"></a>
+        <br>
+        <a href="#" id="create-room2"><img src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677999164/1491254405-plusaddmoredetail_82972_iy8rgr.png"></a>
+        <br>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-        document.querySelector('#room-name-input').focus();
-        document.querySelector('#room-name-input').onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
-                document.querySelector('#room-name-submit').click();
-            }
-        };
+        function joinRoom(room_name) {
+          var new_pathname = '/chat/' + room_name + '/';
+          window.location.pathname = new_pathname;
+        }
 
-        document.querySelector('#room-name-submit').onclick = function(e) {
-            var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
-        };
+
+        const search = document.getElementById('search-room');
+        const create = document.getElementById('create-room');
+
+        search.style.display = "none";
+        create.style.display = "none";
+
+        const search1 = document.getElementById('search-room2');
+        const create1 = document.getElementById('create-room2');
+
+        search1.addEventListener('click', function() {
+        if (search.style.display === 'none') {
+            search.style.display = 'block';
+            if (create.style.display === 'block') {
+            create.style.display = 'none';
+            } 
+        } else {
+            search.style.display = 'none';
+        }
+        });
+
+        create1.addEventListener('click', function() {
+        if (create.style.display === 'none') {
+            create.style.display = 'block';
+            if (search.style.display === 'block') {
+            search.style.display = 'none';
+            }
+        } else {
+            create.style.display = 'none';
+        }
+        });
     </script>
-</body>
+  </body>
 </html>
