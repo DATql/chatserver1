@@ -12,7 +12,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src = "{% static 'reconnecting-websocket.js' %}"></script>
+	
     <style>
         /* **********************************
     Reset CSS
@@ -814,21 +814,7 @@
                                     <div class="modal-body">
                                         <div class="msg-body">
                                             <ul id = "chat-log">
-                                                <li class="sender">
-                                                    
-                                                    <p>
-                                                        <b style ="font-size: 17px;color: #000;" class="fw-bolder mb-3">Tom</b>
-                                                        Hey, Are you there? 
-                                                    </p>
-                                                    <span class="time">10:06 am</span>
-                                                </li>
-                                                <li class="repaly">
-                                                    
-                                                    <p>
-                                                        yes!
-                                                    </p>
-                                                    <span class="time">10:20 am</span>
-                                                </li>
+                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -857,8 +843,16 @@
     <!-- char-area -->
 </body>
 </html>
-
+<script src = "{% static 'reconnecting-websocket.js' %}"></script>
     <script>
+
+        getdatehandel = function(){
+            var today = new Date()
+            var hour = today.getHours()
+            var minute = today.getMinutes()
+            return hour + ":" + minute
+        }
+
 		handelJson = function(idJson){
 			var jsonContext = JSON.parse(document.getElementById(`${idJson}`).textContent);
 			var h3Element = document.getElementById(`${idJson}`)
@@ -868,6 +862,8 @@
 
         var roomName = {{room_name_json}};
         var username = {{username}};
+        var user_id = {{user_id}};
+        
 
         const chatSocket = new ReconnectingWebSocket(
             'ws://'
@@ -879,7 +875,6 @@
 
         chatSocket.onmessage = function(e) {
             var data = JSON.parse(e.data);
-			console.log(data);
             var arrData = data.arrMessages
            
             if(Array.isArray(arrData))
@@ -887,13 +882,19 @@
                 arrData.map(item => {
                     var msgListTag = document.createElement('li');
                     var pTag = document.createElement('p');
+                    var spanElement= document.createElement('span');
+                    spanElement.innerHTML = item.timestamp
+                    spanElement.innerHTML = item.timestamp
                     pTag.innerHTML = item.content;
+                   
                     if(item.username === username){
                         msgListTag.className = 'repaly';
                     } else {
                         msgListTag.className = 'sender';
                     }
+                    spanElement.className = 'time'
                     msgListTag.appendChild(pTag)
+                    msgListTag.appendChild(spanElement)
                     document.querySelector('#chat-log').appendChild(msgListTag);
                 })
 
@@ -933,10 +934,14 @@
 			e.preventDefault();
 			var messageInputDom = document.getElementById('chat-message-input');
 			var message = messageInputDom.value;
+            var timestamp = getdatehandel()
 			chatSocket.send(JSON.stringify({
 				'command': 'new_message',
 				'message':message,
-				'from': username
+				'from': username,
+                'user_id':user_id,
+                'timestamp': timestamp
+
 			}));
 			messageInputDom.value = '';
 		}
@@ -945,5 +950,6 @@
 			window.location.href = "http://127.0.0.1:8000/index";
 		}
     </script>
+
 
 </body></html>

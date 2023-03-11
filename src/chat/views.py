@@ -55,10 +55,14 @@ def chatroom(request, room_name):
 
     if request.user.is_authenticated:
         username = request.user.username
+        user_id = request.user.id
+      
 
     return render( request, 'chat/room.html', {
         'room_name_json': mark_safe(json.dumps(room_name)),
         'username':mark_safe(json.dumps(username)),
+        'user_id':mark_safe(json.dumps(user_id)),
+        
         })
 
 
