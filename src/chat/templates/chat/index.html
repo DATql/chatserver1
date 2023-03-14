@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
     <!-- Google Fonts -->
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap"
+            rel="stylesheet"
     />
 
     <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"
     />
 
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-      crossorigin="anonymous"
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
     />
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-      crossorigin="anonymous"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"
     ></script>
 
     <style>
@@ -135,135 +135,141 @@
         80% { transform:  rotate(10deg); }
         100% { transform:  rotate(-5deg); }
     }
+
     </style>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  </head>
-  <body style="background-color: #f5f5f5;"">
-    <!--navbar-->
-    <nav style="background-color: white">
-      <div class="container">
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body style="background-color: #f5f5f5;"
+">
+<!--navbar-->
+<nav style="background-color: white">
+    <div class="container">
         <nav class="navbar navbar-expand-sm">
-          <div class="container-fluid">
-            <a class="navbar-brand fw-bolder" href="#" style="font-size: 25px">
-              <img
-                src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677856451/live-chat_icon-icons.com_52831_elkqw9.png"
-                alt="Avatar Logo"
-                style="width: 40px; margin-right: 10px"
-                class="rounded-pill d-inline-block align-text-top"
-              />
-              CHAT ROOM
-            </a>
-            <div>
-              {% if request.user.is_authenticated %}
-                <span
-                  class="text-danger fst-italic fw-bolder"
-                  style="margin-right: 20px"
-                  >Welcome, {{ request.user.username }}!</span>
-                  <a class="btn btn-outline-primary me-2" href="{% url 'logout' %}">Logout</a>
-              {%else%}
-                  <span
-                  class="text-danger fst-italic fw-bolder"
-                  style="margin-right: 20px"
-                  >Please log in to continue.</span>
-                  <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a>
-              {%endif%}
-             
-            </div>
-          </div>
-        </nav>
-      </div>
-    </nav>
-    <!--navbar-->
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bolder" href="#" style="font-size: 25px">
+                    <img
+                            src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677856451/live-chat_icon-icons.com_52831_elkqw9.png"
+                            alt="Avatar Logo"
+                            style="width: 40px; margin-right: 10px"
+                            class="rounded-pill d-inline-block align-text-top"
+                    />
+                    CHAT ROOM
+                </a>
+                <div>
+                    {% if request.user.is_authenticated %}
+                    <span
+                            class="text-danger fst-italic fw-bolder"
+                            style="margin-right: 20px"
+                    >Welcome, {{ request.user.username }}!</span>
+                    <a class="btn btn-outline-primary me-2" href="{% url 'logout' %}">Logout</a>
+                    {%else%}
+                    <span
+                            class="text-danger fst-italic fw-bolder"
+                            style="margin-right: 20px"
+                    >Please log in to continue.</span>
+                    <a class="btn btn-outline-primary me-2" href="{% url 'login' %}">Login</a>
+                    {%endif%}
 
-    <!-- rooms -->
-    <section class="message-area" style="padding: 10px 0 0 0">
-      <div class="room-selection container">
-        
+                </div>
+            </div>
+        </nav>
+    </div>
+</nav>
+<!--navbar-->
+
+<!-- rooms -->
+<section class="message-area" style="padding: 10px 0 0 0">
+    <div class="room-selection container">
+
         <div class="container">
             <h1>Room List</h1>
         </div>
         <div class="room-list">
             <div class="room-item " id="search-room">
-                
-                <form action="/search-room" method="POST" style="padding-top:30px">
+
+                <form  method="POST" style="padding-top:30px">
                     <!-- username -->
                     <div class="form-group">
                         <label for="">Roomname</label>
                         <input type="text" name="Roomname"
-                         id="" value="" class="form-control form-control-sm" 
-                         placeholder="">
+                               id="" value="" class="form-control form-control-sm"
+                               placeholder="">
                     </div>
                     <!-- password -->
                     <div class="form-group">
                         <label for="">Password</label>
-                        <input type="password" 
-                        name="password" 
-                        id=""
-                         class="form-control form-control-sm" placeholder="********">
+                        <input type="password"
+                               name="password"
+                               id=""
+                               class="form-control form-control-sm" placeholder="********">
                     </div>
                     <div class="form-group">
-                        
-                        <input class="btn btn-sm btn-info" type="submit" value="Join Room">
-                    </div> 
+
+                        <input class="btn btn-sm btn-info"name="searchroom" type="submit" value="Join Room">
+                    </div>
                 </form>
+
             </div>
-            <div class="room-item " id ="create-room"> 
-                <form action="/create-room" method="POST">
+            <div class="room-item " id="create-room">
+                <form  method="POST">
+                      {% csrf_token %}
                     <!-- roomname -->
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="">Roomname</label>
-                        <input type="text" name="Roomname"
-                         id="" value="" class="form-control form-control-sm" 
-                         placeholder="">
+                        <input type="text" name="roomname"
+                                value="" class="form-control form-control-sm"
+                               placeholder="">
                     </div>
                     <!-- password -->
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="">Password</label>
-                        <input type="password" 
-                        name="password" 
-                        id=""
-                         class="form-control form-control-sm" placeholder="********">
+                        <input type="password"
+                               name="password"
+
+                               class="form-control form-control-sm" placeholder="********">
                     </div>
                     <!-- confirmpassword -->
                     <div class="form-group" style="margin-bottom: 12px;">
                         <label for="">Confirm Password</label>
-                        <input type="password" 
-                        name="password" 
-                        id=""
-                         class="form-control form-control-sm" placeholder="********">   
+                        <input type="password"
+                               name="confirmpassword"
+
+                               class="form-control form-control-sm" placeholder="********">
                     </div>
                     <div class="form-group">
-                        <input class="btn btn-sm btn-info" type="submit" value="Create Room">
-                    </div> 
+                        <input class="btn btn-sm btn-info" name="createroom" type="submit" value="Create Room">
+                    </div>
                 </form>
             </div>
             <!-- room -->
             {% for room in rooms %}
             <div class="room-item">
                 <img
-                 src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677994637/room_l6bep9.jpg"
-                alt=""
+                        src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677994637/room_l6bep9.jpg"
+                        alt=""
                 />
                 <h2>{{room}}</h2>
                 <a href="#" onclick="joinRoom('{{room}}')">Join now</a>
             </div>
-          {% endfor %}
-            
-            <!-- room -->       
+            {% endfor %}
+
+            <!-- room -->
         </div>
-      </div>
-    </section>
-    <!-- rooms -->
-    <div class="service">
-        
-        <a href="#" id="search-room2"><img src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677999164/searchmagnifierinterfacesymbol1_79893_zbo0g1.png"></a>
-        <br>
-        <a href="#" id="create-room2"><img src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677999164/1491254405-plusaddmoredetail_82972_iy8rgr.png"></a>
-        <br>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
+</section>
+<!-- rooms -->
+<div class="service">
+
+    <a href="#" id="search-room2"><img
+            src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677999164/searchmagnifierinterfacesymbol1_79893_zbo0g1.png"></a>
+    <br>
+    <a href="#" id="create-room2"><img
+            src="https://res.cloudinary.com/dfzvtpwsd/image/upload/v1677999164/1491254405-plusaddmoredetail_82972_iy8rgr.png"></a>
+    <br>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
         function joinRoom(room_name) {
           var new_pathname = '/chat/' + room_name + '/';
           window.location.pathname = new_pathname;
@@ -300,6 +306,7 @@
             create.style.display = 'none';
         }
         });
-    </script>
-  </body>
+
+</script>
+</body>
 </html>

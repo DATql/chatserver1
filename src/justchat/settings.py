@@ -44,6 +44,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
 ]
 
 ROOT_URLCONF = 'justchat.urls'
@@ -87,7 +88,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chatserver1',
         'USER': 'root',
-        'PASSWORD': '12345678',
+        'PASSWORD': 'Goneanhem1',
         'HOST': ''  # mặc định localhost
     }
 }
